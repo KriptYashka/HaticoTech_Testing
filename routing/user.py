@@ -19,3 +19,16 @@ async def get_all_users(
 ) -> List[SUser]:
    users = await user_service.get_users()
    return users
+
+@router.post(
+   "",
+   responses={400: {"description": "Bad request"}},
+   response_model=SUser,
+   description="Создание пользователей",
+)
+async def create_user(
+       _user: SUser,
+       user_service: UserService = Depends(get_user_service),
+) -> SUser:
+   user = await user_service.create_user(_user)
+   return user

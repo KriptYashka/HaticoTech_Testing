@@ -2,15 +2,19 @@ from typing import List
 from sqlalchemy import select, update, delete, CursorResult
 from orm.user import UserOrm
 from database import new_session
+from schemas import SUser
+
 
 class UserRepository:
     @classmethod
-    async def create_user(cls, user: UserOrm) -> UserOrm:
+    async def create_user(cls, user: SUser) -> UserOrm:
         async with new_session() as session:
-            session.add(user)
+            data = user.model_dump()
+            new_user = UserOrm(**data)
+            session.add(new_user)
             await session.flush()
             await session.commit()
-            return user
+            return new_user
 
     @classmethod
     async def get_users(cls) -> list[UserOrm]:
