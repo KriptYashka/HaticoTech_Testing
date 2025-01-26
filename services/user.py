@@ -1,17 +1,17 @@
 from typing import List
 
 from repositories.user import UserRepository
-from schemas.user import User
+from schemas.user import SUser
 
 
 class UserService:
     def __init__(self, repository: UserRepository) -> None:
         self.repository = repository
 
-    def get_tokens(self) -> List[User]:
-        result = self.repository.get_tokens()
+    async def get_users(self) -> List[SUser]:
+        result = await self.repository.get_users()
         return result
 
-    def create_token(self) -> User:
-        result = self.repository.create_token()
+    async def create_user(self) -> SUser:
+        result = await self.repository.create_user()
         return result

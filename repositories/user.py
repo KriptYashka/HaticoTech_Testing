@@ -32,7 +32,7 @@ class UserRepository:
 
 
     @classmethod
-    async def delete_user_by_tg_id(cls, username_tg: str):
+    async def delete_user(cls, username_tg: str):
         async with new_session() as session:
             query = delete(UserOrm).where(UserOrm.username_tg == username_tg)
             result: CursorResult = await session.execute(query)

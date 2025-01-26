@@ -3,11 +3,11 @@ from typing import List
 from sqlalchemy import select, update, delete, CursorResult
 from database import new_session
 from orm import TokenOrm
-from schemas.token import Token
+from schemas.token import SToken
 
 class TokenRepository:
     @classmethod
-    async def create_token(cls, token: Token) -> Token:
+    async def create_token(cls, token: SToken) -> SToken:
         async with new_session() as session:
             session.add(token)
             await session.flush()
