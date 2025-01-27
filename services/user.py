@@ -15,3 +15,7 @@ class UserService:
     async def create_user(self, _user: SUser) -> SUser:
         result = await self.repository.create_user(_user)
         return result
+
+    async def delete_user(self, _user: SUser) -> SUser:
+        result = await self.repository.delete_user(_user.username_tg)
+        return result

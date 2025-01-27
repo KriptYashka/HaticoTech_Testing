@@ -24,7 +24,7 @@ async def get_all_users(
    "",
    responses={400: {"description": "Bad request"}},
    response_model=SUser,
-   description="Создание пользователей",
+   description="Создание пользователя",
 )
 async def create_user(
        _user: SUser,
@@ -32,3 +32,15 @@ async def create_user(
 ) -> SUser:
    user = await user_service.create_user(_user)
    return user
+
+@router.delete(
+   "",
+   responses={400: {"description": "Bad request"}},
+   description="Удаление пользователя",
+)
+async def delete_user(
+       _user: SUser,
+       user_service: UserService = Depends(get_user_service),
+) -> dict:
+   user = await user_service.delete_user(_user)
+   return {"status": "OK"}

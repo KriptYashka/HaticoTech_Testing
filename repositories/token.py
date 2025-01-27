@@ -16,7 +16,7 @@ class TokenRepository:
 
 
     @classmethod
-    async def get_token(cls, username_tg: int) -> TokenOrm:
+    async def get_token(cls, username_tg: str) -> TokenOrm:
         async with new_session() as session:
             query = select(TokenOrm).where(TokenOrm.username_tg == username_tg)
             result = await session.execute(query)

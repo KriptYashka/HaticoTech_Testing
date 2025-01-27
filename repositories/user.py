@@ -1,5 +1,7 @@
 from typing import List
 from sqlalchemy import select, update, delete, CursorResult
+import logging
+
 from orm.user import UserOrm
 from database import new_session
 from schemas import SUser
